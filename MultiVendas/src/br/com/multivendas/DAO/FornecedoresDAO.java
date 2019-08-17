@@ -7,7 +7,8 @@ import br.com.multivendas.conexao.Conexao_bd;
 import br.com.multivendas.domain.Fornecedores;
 
 public class FornecedoresDAO {
-
+	
+	//Comando salvar
 	public void salvar(Fornecedores f) throws SQLException {
 		StringBuilder sql = new StringBuilder();
 
@@ -21,7 +22,8 @@ public class FornecedoresDAO {
 		comando.setString(1, f.getDescricao());
 		comando.executeUpdate();
 	}
-
+	
+	//Comando excluir 
 	public void excluir(Fornecedores f) throws SQLException {
 
 		StringBuilder sql = new StringBuilder();
@@ -34,7 +36,8 @@ public class FornecedoresDAO {
 		comando.setLong(1, f.getCodigo());
 		comando.executeUpdate();
 	}
-
+	
+	//Comando editar 
 	public void editar(Fornecedores f) throws SQLException {
 
 		StringBuilder sql = new StringBuilder();
