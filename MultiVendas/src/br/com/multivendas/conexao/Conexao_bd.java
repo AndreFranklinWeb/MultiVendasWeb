@@ -2,7 +2,6 @@ package br.com.multivendas.conexao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLDataException;
 import java.sql.SQLException;
 
 public class Conexao_bd {
@@ -15,7 +14,7 @@ public class Conexao_bd {
 		Connection conexao = DriverManager.getConnection(URL, USUARIO, SENHA);
 		return conexao;
 	}
-
+	/*
 	public static void main(String[] args) {
 
 		try {
@@ -25,7 +24,5 @@ public class Conexao_bd {
 			ex.printStackTrace();
 			System.out.println("Conexão com o banco de dados falhou !");
 		}
-
-	}
-
+	} */
 }
