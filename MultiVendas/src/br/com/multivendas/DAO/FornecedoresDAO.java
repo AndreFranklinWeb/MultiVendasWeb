@@ -110,7 +110,7 @@ public class FornecedoresDAO {
 	}
 		
 
-	// Comando busca por codigo
+	// Comando Listar
 	public ArrayList<Fornecedores> listar() throws SQLException {
 
 		StringBuilder sql = new StringBuilder();
