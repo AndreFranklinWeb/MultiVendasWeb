@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/modeloSistema.xhtml">
+
+	<ui:define name="menu">
+		<ui:include src="/includes/menu.xhtml" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+
+		<h:form>
+			<p:dataTable emptyMessage="Nenhum registro encontrado na tabela"
+				value="#{MBFornecedores.itens}" var="item" paginator="true"
+				rows="10">
+			>
+
+			<p:column headerText="Código" sortBy="#{item.codigo}"
+					filterBy="#{item.codigo}">
+					<h:outputText value="#{item.codigo}" />
+				</p:column>
+
+				<p:column headerText="Descrição" sortBy="#{item.descricao}"
+					filterBy="#{item.descricao}">
+					<h:outputText value="#{item.descricao}" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
+		<p:dialog widgetVar="dlgforNovo" closable="2" draggable="false" resizable="false">
+		<h:form>
+			<h:panelGrid columns="2">
+				<p:outputLabel value="Descrição: " />
+				<p:inputText size="30" maxlength="50" />
+			</h:panelGrid>
+			<h:panelGrid columns="2">
+				<p:commandButton value="Gravar" />
+				<p:commandButton value="Cancelar" />
+			</h:panelGrid>
+		</h:form>
+		</p:dialog>
+		
+		<p:commandButton value="Novo" onclick="pf('dlgforNovo').show()" />
+
+	</ui:define>
+
+</ui:composition>

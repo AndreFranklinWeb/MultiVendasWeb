@@ -109,7 +109,6 @@ public class FornecedoresDAO {
 		return lista;
 	}
 		
-
 	// Comando Listar
 	public ArrayList<Fornecedores> listar() throws SQLException {
 

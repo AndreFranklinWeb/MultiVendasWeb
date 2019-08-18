@@ -9,8 +9,12 @@ public class Conexao_bd {
 	private static final String USUARIO = "root";
 	private static final String SENHA = "";
 	private static final String URL = "jdbc:mysql://localhost:3306/bd_multivendas";
-
+	
 	public static Connection conectar() throws SQLException {
+		
+		//Referência ao driver do mysql para versões antigas do java.
+		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+		
 		Connection conexao = DriverManager.getConnection(URL, USUARIO, SENHA);
 		return conexao;
 	}
