@@ -16,6 +16,18 @@ import br.com.multivendas.domain.Fornecedores;
 @ViewScoped
 public class FornecedoresBean {
 
+	private Fornecedores fornecedores;
+
+	
+
+	public Fornecedores getFornecedores() {
+		return fornecedores;
+	}
+
+	public void setFornecedores(Fornecedores fornecedores) {
+		this.fornecedores = fornecedores;
+	}
+
 	private ListDataModel<Fornecedores> itens;
 
 	public ListDataModel<Fornecedores> getItens() {
@@ -25,17 +37,33 @@ public class FornecedoresBean {
 	public void setItens(ListDataModel<Fornecedores> itens) {
 		this.itens = itens;
 	}
-	
+
 	@PostConstruct
-	public void prepararPesquisa(){
-		
-		FornecedoresDAO fdao = new FornecedoresDAO();
-				
+	public void prepararPesquisa() {
+
 		try {
-		ArrayList<Fornecedores>lista = fdao.listar();
-		itens = new ListDataModel<Fornecedores>(lista);
-		}catch (SQLException e){
+			FornecedoresDAO fdao = new FornecedoresDAO();
+			ArrayList<Fornecedores> lista = fdao.listar();
+			itens = new ListDataModel<Fornecedores>(lista);
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}		
-	}	
-}
+		}
+	}
+	
+	public void prepararNovo() {		
+		fornecedores = new Fornecedores();
+	}
+
+	public void novo() {
+		try {
+			FornecedoresDAO fdao = new FornecedoresDAO();
+			fdao.salvar(fornecedores);
+			
+						ArrayList<Fornecedores> lista = fdao.listar();
+						itens = new ListDataModel<Fornecedores>(lista);
+			
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+	}}

@@ -27,7 +27,7 @@
 
 	<context-param>
 		<param-name>primefaces.THEME</param-name>
-		<param-value>bootstrap</param-value>
+		<param-value>south-street</param-value>
 	</context-param>
 
 </web-app>

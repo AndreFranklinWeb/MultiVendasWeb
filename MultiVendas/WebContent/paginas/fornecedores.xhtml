@@ -14,39 +14,49 @@
 
 	<ui:define name="conteudo">
 
-		<h:form>
-			<p:dataTable emptyMessage="Nenhum registro encontrado na tabela"
+		<h:form id="frm_fornecedores">
+			<p:dataTable id="tb_fornecedores" emptyMessage="Nenhum registro encontrado na tabela"
 				value="#{MBFornecedores.itens}" var="item" paginator="true"
 				rows="10">
-			>
+				
+				<f:facet name="header" >Lista de Fornecedores</f:facet>
 
 			<p:column headerText="Código" sortBy="#{item.codigo}"
 					filterBy="#{item.codigo}">
 					<h:outputText value="#{item.codigo}" />
-				</p:column>
+			</p:column>
 
 				<p:column headerText="Descrição" sortBy="#{item.descricao}"
 					filterBy="#{item.descricao}">
 					<h:outputText value="#{item.descricao}" />
 				</p:column>
+				
+				<f:facet name="footer"><p:commandButton value="Novo" actionListener="#{MBFornecedores.prepararNovo}" 
+				oncomplete="PF('dlgforNovo').show();" /></f:facet>
+				
 			</p:dataTable>
 		</h:form>
 
-		<p:dialog widgetVar="dlgforNovo" closable="2" draggable="false" resizable="false">
-		<h:form>
-			<h:panelGrid columns="2">
-				<p:outputLabel value="Descrição: " />
-				<p:inputText size="30" maxlength="50" />
-			</h:panelGrid>
-			<h:panelGrid columns="2">
-				<p:commandButton value="Gravar" />
-				<p:commandButton value="Cancelar" />
-			</h:panelGrid>
-		</h:form>
+		<p:dialog widgetVar="dlgforNovo" closable="false" draggable="false"
+			resizable="false"
+			header="Cadastrar Fornecedor"
+			modal="true"
+			appendTo="@(body)">
+			
+			<h:form>
+				<h:panelGrid columns="2">
+					<p:outputLabel value="Descrição:" />
+					<p:inputText size="30" maxlength="50" value="#{MBFornecedores.fornecedores.descricao}"/>
+				</h:panelGrid>
+
+				<h:panelGrid columns="2">
+					<p:commandButton value="Salvar" actionListener="#{MBFornecedores.novo}" 
+					oncomplete="PF('dlgforNovo').hide();" update=":frm_fornecedores:tb_fornecedores"/>
+					<p:commandButton value="Cancelar" onclick="PF('dlgforNovo').hide();"/>
+				</h:panelGrid>
+			</h:form>
 		</p:dialog>
 		
-		<p:commandButton value="Novo" onclick="pf('dlgforNovo').show()" />
-
 	</ui:define>
 
 </ui:composition>
