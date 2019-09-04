@@ -31,8 +31,9 @@
 					<h:outputText value="#{item.descricao}" />
 				</p:column>
 				
-				<f:facet name="footer"><p:commandButton value="Novo" actionListener="#{MBFornecedores.prepararNovo}" 
-				oncomplete="PF('dlgforNovo').show();" /></f:facet>
+				<f:facet name="footer">
+				<p:commandButton value="Novo" actionListener="#{MBFornecedores.prepararNovo}" 
+				oncomplete="PF('dlgforNovo').show();" update=":frm_novoForn:pn_novoForn"/></f:facet>
 				
 			</p:dataTable>
 		</h:form>
@@ -43,20 +44,20 @@
 			modal="true"
 			appendTo="@(body)">
 			
-			<h:form>
-				<h:panelGrid columns="2">
+			<h:form id="frm_novoForn">
+				<h:panelGrid id="pn_novoForn" columns="2">
 					<p:outputLabel value="Descrição:" />
 					<p:inputText size="30" maxlength="50" value="#{MBFornecedores.fornecedores.descricao}"/>
 				</h:panelGrid>
 
 				<h:panelGrid columns="2">
-					<p:commandButton value="Salvar" actionListener="#{MBFornecedores.novo}" 
-					oncomplete="PF('dlgforNovo').hide();" update=":frm_fornecedores:tb_fornecedores"/>
+					<p:commandButton value="Salvar" actionListener="#{MBFornecedores.novo}"
+					oncomplete="PF('dlgforNovo').hide();" update=":frm_fornecedores:tb_fornecedores :msgGlobal"/>
 					<p:commandButton value="Cancelar" onclick="PF('dlgforNovo').hide();"/>
 				</h:panelGrid>
 			</h:form>
-		</p:dialog>
-		
+		</p:dialog>	
+				
 	</ui:define>
 
 </ui:composition>
