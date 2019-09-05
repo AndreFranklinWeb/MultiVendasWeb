@@ -1,6 +1,6 @@
 package br.com.multivendas.bean;
 
-import java.io.LineNumberInputStream;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -50,6 +50,8 @@ public class FornecedoresBean {
 		}
 	}
 
+//Salvando Fornecedores
+	
 	public void prepararNovo() {
 		fornecedores = new Fornecedores();
 	}
@@ -69,4 +71,30 @@ public class FornecedoresBean {
 			e.printStackTrace();
 		}
 	}
+
+	
+//Excluindo Fornecedores
+	
+	public void prepararExcluir() {
+		fornecedores = itens.getRowData();		
+	}
+	
+	public void excluir() {
+		try {
+			FornecedoresDAO fdao = new FornecedoresDAO();
+			fdao.excluir(fornecedores);
+			
+			ArrayList<Fornecedores> lista = fdao.listar();
+			itens = new ListDataModel<Fornecedores>(lista);
+			
+			JSFUtil.adicionarMensagemSucesso("Fornecedor excluido com sucesso!");
+
+		} catch (SQLException e) {
+			JSFUtil.adicionarMensagemErro("Não é possivel excluir um fornecedor que tenha um produto associado!");
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
 }
