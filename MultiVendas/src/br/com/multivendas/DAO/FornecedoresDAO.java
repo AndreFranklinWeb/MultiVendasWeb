@@ -118,11 +118,8 @@ public class FornecedoresDAO {
 		sql.append("ORDER BY descricao_forn ASC ");
 
 		Connection conexao = Conexao_bd.conectar();
-
 		PreparedStatement comando = conexao.prepareStatement(sql.toString());
-
 		ResultSet resultado = comando.executeQuery();
-
 		ArrayList<Fornecedores> lista = new ArrayList<Fornecedores>();
 
 		while (resultado.next()) {

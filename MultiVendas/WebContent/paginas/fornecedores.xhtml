@@ -15,9 +15,11 @@
 	<ui:define name="conteudo">
 
 		<h:form id="frm_fornecedores">
-			<p:dataTable id="tb_fornecedores"
+			<p:dataTable id="tb_fornecedores" widgetVar="tabelaFornecedores"
 				emptyMessage="Nenhum registro encontrado na tabela"
-				value="#{MBFornecedores.itens}" var="item" paginator="true" rows="9">
+				value="#{MBFornecedores.itens}" var="item"
+				filteredValue="#{MBFornecedores.itensFiltrados}" paginator="true"
+				rows="9">
 
 				<f:facet name="header">Lista de Fornecedores</f:facet>
 
@@ -33,12 +35,18 @@
 
 				<p:column headerText="Opções">
 					<p:commandButton icon="ui-icon-trash"
-						actionListener="#{MBFornecedores.prepararExcluir}"
-						oncomplete="PF('dlgforExcluir').show();" update=":frm_excluirForn:pn_excluirForn" />
+						oncomplete="PF('dlgforExcluir').show();"
+						update=":frm_excluirForn:pn_excluirForn">
+						<f:setPropertyActionListener value="#{item}"
+							target="#{MBFornecedores.fornecedores}"></f:setPropertyActionListener>
+					</p:commandButton>
 
 					<p:commandButton icon="ui-icon-pencil"
-						actionListener="#{MBFornecedores.prepararEditar}"
-						oncomplete="PF('dlgforEditar').show();"	update=":frm_editarForn:pn_editarForn" />
+						oncomplete="PF('dlgforEditar').show();"
+						update=":frm_editarForn:pn_editarForn">
+						<f:setPropertyActionListener value="#{item}"
+							target="#{MBFornecedores.fornecedores}"></f:setPropertyActionListener>
+					</p:commandButton>
 				</p:column>
 
 				<f:facet name="footer">
@@ -66,7 +74,7 @@
 				<h:panelGrid columns="2">
 					<p:commandButton value="Salvar"
 						actionListener="#{MBFornecedores.novo}"
-						oncomplete="PF('dlgforNovo').hide();"
+						oncomplete="PF('dlgforNovo').hide() PF('tabelaFabricantes').clearFilters();"
 						update=":frm_fornecedores:tb_fornecedores :msgGlobal" />
 					<p:commandButton value="Cancelar"
 						onclick="PF('dlgforNovo').hide();" />
@@ -93,16 +101,17 @@
 				<h:panelGrid columns="2">
 					<p:commandButton value="Excluir"
 						actionListener="#{MBFornecedores.excluir}"
-						oncomplete="PF('dlgforExcluir').hide();"
+						oncomplete="PF('dlgforExcluir').hide() PF('tabelaFabricantes').clearFilters();"
 						update=":frm_fornecedores:tb_fornecedores :msgGlobal" />
 					<p:commandButton value="Cancelar"
-						onlick="PF('dlgforExcluir').hide();" />
+						onclick="PF('dlgforExcluir').hide();" />
+
 				</h:panelGrid>
 			</h:form>
 		</p:dialog>
-		
+
 		<!--BOTÃO EDITAR-->
-		
+
 		<p:dialog widgetVar="dlgforEditar" closable="false" draggable="false"
 			resizable="false" header="Editar Fornecedor" modal="true"
 			appendTo="@(body)">
@@ -119,10 +128,10 @@
 				<h:panelGrid columns="2">
 					<p:commandButton value="Editar"
 						actionListener="#{MBFornecedores.editar}"
-						oncomplete="PF('dlgforEditar').hide();"
+						oncomplete="PF('dlgforEditar').hide() PF('tabelaFabricantes').clearFilters();"
 						update=":frm_fornecedores:tb_fornecedores :msgGlobal" />
 					<p:commandButton value="Cancelar"
-						onlick="PF('dlgforEditar').hide();" />
+						onclick="PF('dlgforEditar').hide();" />
 				</h:panelGrid>
 			</h:form>
 		</p:dialog>
